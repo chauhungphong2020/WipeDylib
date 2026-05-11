@@ -1,19 +1,19 @@
 name: Build iOS Dylib
-on: [push] # Cứ mỗi lần bạn nhấn Lưu code là nó tự build
+on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest # GitHub sẽ cho bạn mượn một máy Mac ảo để build
+    runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Cập nhật v3 lên v4
 
       - name: Compile Dylib
         run: |
           xcrun -sdk iphoneos clang -dynamiclib -arch arm64 main.m -o WipeData.dylib -framework UIKit -framework Foundation
           
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Đây là chỗ quan trọng, đổi v3 thành v4
         with:
           name: MyWipeDylib
           path: WipeData.dylib
